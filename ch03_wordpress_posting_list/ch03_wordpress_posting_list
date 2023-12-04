@@ -1,0 +1,16 @@
+from time import sleep
+
+
+
+
+
+
+
+# main start
+if __name__ == '__main__':
+    try:
+        print("\nSTART...")
+        
+        
+    finally:
+        print("\nEND...")

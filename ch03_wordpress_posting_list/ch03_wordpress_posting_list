@@ -1,9 +1,30 @@
 from time import sleep
+import feedparser
+from pprint import pprint as pp
+import requests
+import re
+
+tistory_rss_address = 'https://ree31206.tistory.com/rss'
+tistory_sitemap_address = 'https://ree31206.tistory.com/sitemap.xml'
+tistory_sitemap_address_re = 'https://ree31206.tistory.com'
+
+def get_rss_tistory_list():
+    parse_res = feedparser.parse(tistory_rss_address)
+    # pp(parse_res)
+    
+    for idx, entry in enumerate(parse_res.entries):  # for 반복문, enumerate
+        print(f'{idx + 1}. {entry.link}')  # f string 문법
 
 
-
-
-
+def get_sitemap_tistory_list():
+    res = requests.get(tistory_sitemap_address)
+    pattern = f'(?<={tistory_sitemap_address_re}/)+[^\s]*(?=</loc>)'
+    url_info_lists = re.findall(pattern, res.text)
+    # print(url_info_lists)
+    
+    for idx, url_info in enumerate(url_info_lists):
+        if url_info.isdigit() or url_info.find('entry/') == 0:
+            print(f'{idx + 1}. https://ree31206.tistory.com/{url_info}')
 
 
 # main start
@@ -11,6 +32,8 @@ if __name__ == '__main__':
     try:
         print("\nSTART...")
         
+        # get_rss_tistory_list()
+        get_sitemap_tistory_list()
         
     finally:
         print("\nEND...")

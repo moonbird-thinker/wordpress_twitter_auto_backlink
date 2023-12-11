@@ -42,8 +42,8 @@ def init_driver():
     options.add_experimental_option("debuggerAddress", "127.0.0.1:9224")  # 디버깅 모드
 
     # service = ChromeService('C:\\Users\\ree31\\.wdm\\drivers\\chromedriver\\win64\\118.0.5993.71\\chromedriver.exe')
-    service = ChromeService('C:\\Users\\ree31\\.wdm\\drivers\\chromedriver\\win64\\119.0.6045.106\\chromedriver.exe')
-    # service = ChromeService(executable_path=ChromeDriverManager().install())
+    # service = ChromeService('C:\\Users\\ree31\\.wdm\\drivers\\chromedriver\\win64\\119.0.6045.106\\chromedriver.exe')
+    service = ChromeService(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     driver.implicitly_wait(LOADING_WAIT_TIME)
     return driver
